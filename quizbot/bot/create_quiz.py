@@ -27,7 +27,7 @@ dict_question_types = {
     'Число': QuestionNumber,
     'Строка': QuestionString,
     'Булево значение (верно/неверно)': QuestionBool,
-    'Выбор одного из вариантов отета': QuestionChoice,
+    'Выбор одного из вариантов ответа': QuestionChoice,
     'Выбор нескольких вариантов ответа': QuestionChoiceSingle
 }
 
@@ -60,7 +60,7 @@ def start(update, _):
     update.message.reply_text(
         "Окей 😃 Сделаем новую викторину!\n"
         "Выберите тип ответа на первый вопрос\n"
-        'Если передумали создаватб викторину, введите /cancelCreate.',
+        'Если передумали создавать викторину, введите /cancelCreate.',
         reply_markup=ReplyKeyboardMarkup(
             list_question, one_time_keyboard=True)
     )
@@ -90,7 +90,7 @@ def enter_type(update, _):
     Otherwise, it asks if the question should be displayed in random order.
     """
 
-    if update.message.text == "Enter":
+    if update.message.text == "Готово":
         # User dont want to add more questions
         # Asks for randomness
         update.message.reply_text(
@@ -371,7 +371,7 @@ def enter_quiz_name(update, context):
     user_col.insert_one(
         {'quizname': quizname, 'quizinstance': pickle.dumps(userDict[user_id]['quiz'])})
     update.message.reply_text(
-        "Отлично! 🥳 Ваша новая викторина сохранена."
+        "Отлично! 🥳 Ваша новая викторина сохранена. "
         "Можно принять в ней участие, введя название {}.".format(quizname),
         reply_markup=ReplyKeyboardRemove()
     )

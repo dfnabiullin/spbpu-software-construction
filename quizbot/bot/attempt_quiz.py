@@ -103,8 +103,8 @@ def enter_quiz(update, context):
     loaded_quiz = pickle.loads(quiz_dict['quizinstance'])
     userDict[user_id] = Attempt(loaded_quiz)
     update.message.reply_text(
-        "Погнали! 🙌 Начинаем викторину '{}'!\n\
-            Вы можете выйти, введя /cancelAttempt.".format(quizname)
+        "Погнали! 🙌\nНачинаем викторину '{}'!\nВы можете выйти, введя /cancelAttempt."
+        .format(quizname)
     )
 
     # Asks first question
@@ -124,7 +124,7 @@ def enter_answer(update, _):
 
     # If the current question is a multiple-choice question,
     # the bot has to wait for "Enter" to enter the answer.
-    if type(act_question) is QuestionChoice and user_message != 'Enter':
+    if type(act_question) is QuestionChoice and user_message != 'Готово':
         # the current question is a multiple-choice question and not ready to enter
 
         logger.info('[%s]Insert Answer "%s", Looking for additional answers',
@@ -204,7 +204,7 @@ def ask_question(update):
     elif isinstance(act_question, QuestionBool):
         # Bool question: Choose between true and false button
         reply_markup = ReplyKeyboardMarkup(
-            [['True', 'False']], one_time_keyboard=True)
+            [['Да', 'Нет']], one_time_keyboard=True)
     elif isinstance(act_question, QuestionChoiceSingle):
         # Single choice question: Choose between possible answers buttons
         list_of_answers = [[el] for el in act_question.possible_answers]
@@ -220,7 +220,7 @@ def ask_question(update):
             # Shuffle if necessary
             random.shuffle(list_of_answers)
         # add termination button
-        list_of_answers.append(['Enter'])
+        list_of_answers.append(['Готово'])
         reply_markup = ReplyKeyboardMarkup(
             list_of_answers, one_time_keyboard=False)
 

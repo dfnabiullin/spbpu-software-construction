@@ -112,7 +112,7 @@ class QuestionBool(Question):
         :param correct_answer: Correct answer of the question as boolean value (True or False).
         :raises AssertionError: If the question or the correct answer is not a boolean value.
         """
-        assert correct_answer in ('True', 'False')
+        assert correct_answer in ('Да', 'Нет')
         super().__init__(question, correct_answer)
 
     def enter_solution(self, answer):
@@ -122,7 +122,7 @@ class QuestionBool(Question):
         :param answer: Answer by the user as a string.
         :raises AssertionError: If the entered answer isn't "True" or "False"
         """
-        assert answer in ("True", "False")
+        assert answer in ("Да", "Нет")
         return super().enter_solution(answer)
 
     def check_solution(self):
